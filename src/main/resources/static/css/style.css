@@ -1,17 +1,44 @@
 @charset "UTF-8";
 
 #wrap {
-   width:1200px;
+   width:1440px;
+   heigth:1024px;
    margin:0 auto;
+   background-color:#FFFFFF;
 }
 
 header {
-   height:100px;
-   background-color:#cccccc;
+   height:126px;
+   background-color:#A6C2FF;
+}
+
+.kaushan-script-regular {
+  font-family: "Kaushan Script", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 
 
-.contents > .input-box {
-   width:400px;
-   background-color:#cccccc;
+#logo {
+	font-family: 'Kaushan Script', cursive;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 85px;
+	line-height: 123px;
+	text-align: center;
+	color:#FFFFFF;
+}
+
+.contents {
+	width:511px;
+	height:800px;
+	border-radius:30px;
+	left: 458px;
+	top: 179px;
+	background: rgba(217, 217, 217, 0.6);
+	margin:0 auto;
+}
+
+.birthdaySelect {
+	width:100%;
 }
