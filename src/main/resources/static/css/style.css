@@ -37,8 +37,9 @@ header {
 	top: 179px;
 	background: rgba(217, 217, 217, 0.6);
 	margin:0 auto;
+	
 }
 
-.birthdaySelect {
-	width:100%;
+.box {
+	width:32%;
 }
