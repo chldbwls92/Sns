@@ -29,6 +29,7 @@ public class UserRestController {
 			, @RequestParam("name") String name
 			, @RequestParam("birthday") LocalDate birthday) {
 		
+		// date format 사용하기
 		Map<String, String> resultMap = new HashMap<>();
 		
 		if(userService.addUser(loginId, password, name, birthday)) {
