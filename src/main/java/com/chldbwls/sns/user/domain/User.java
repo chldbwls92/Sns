@@ -3,51 +3,47 @@ package com.chldbwls.sns.user.domain;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+
+@Builder //롬복
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
+@Table(name="`user`") //펄시스턴스
+@Entity
 public class User {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY) //펄시스턴스
 	private int id;
+	
+	@Column(name="LoginId")
 	private String LoginId;
 	private String name;
 	private LocalDate birthday;
+	
+	@Column(name="createdAt")
+	@CreationTimestamp
 	private LocalDateTime createdAt;
+	
+	@Column(name="updatedAt")
+	@UpdateTimestamp
 	private LocalDateTime updatedAt;
-	
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getLoginId() {
-		return LoginId;
-	}
-	public void setLoginId(String loginId) {
-		LoginId = loginId;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public LocalDate getBirthday() {
-		return birthday;
-	}
-	public void setBirthday(LocalDate birthday) {
-		this.birthday = birthday;
-	}
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
-	public LocalDateTime getUpdatedAt() {
-		return updatedAt;
-	}
-	public void setUpdatedAt(LocalDateTime updatedAt) {
-		this.updatedAt = updatedAt;
-	}
 
 }
