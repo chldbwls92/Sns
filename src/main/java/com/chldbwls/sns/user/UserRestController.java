@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chldbwls.sns.user.service.UserService;
 
+import jakarta.servlet.http.HttpSession;
+
 @RequestMapping("/user")
 @RestController
 public class UserRestController {
@@ -28,6 +30,7 @@ public class UserRestController {
 			, @RequestParam("password") String password
 			, @RequestParam("name") String name
 			, @RequestParam("birthday") LocalDate birthday) {
+		
 		
 		// date format 사용하기
 		Map<String, String> resultMap = new HashMap<>();

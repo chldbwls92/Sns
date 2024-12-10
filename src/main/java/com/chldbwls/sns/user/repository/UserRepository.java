@@ -4,9 +4,12 @@ import java.time.LocalDate;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.chldbwls.sns.user.domain.User;
 
 @Mapper
-public interface UserRepository {
+public interface UserRepository extends JpaRepository<User, Integer>{
 
 	// 유저 추가하기
 	public int insertUser(
