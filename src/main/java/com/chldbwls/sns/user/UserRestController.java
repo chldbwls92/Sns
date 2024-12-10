@@ -4,14 +4,13 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chldbwls.sns.user.service.UserService;
-
-import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/user")
 @RestController
@@ -32,7 +31,7 @@ public class UserRestController {
 			, @RequestParam("birthday") LocalDate birthday) {
 		
 		
-		// date format 사용하기
+
 		Map<String, String> resultMap = new HashMap<>();
 		
 		if(userService.addUser(loginId, password, name, birthday)) {
@@ -42,6 +41,18 @@ public class UserRestController {
 		}
 		
 		return resultMap;
+	}
+	
+	// 중복확인
+	@GetMapping("/duplicate-id")
+	public Map<String, Boolean> isDuplicatedId(@RequestParam("loginId") String loginId) {
+		
+		Map<String, Boolean> resultMap = new HashMap<>();
+		// 있으면 true 없으면 false
+		resultMap.put("isDuplicate", userService.isDuplicateId(loginId));
+		
+		return resultMap;
+		
 	}
 	
 }

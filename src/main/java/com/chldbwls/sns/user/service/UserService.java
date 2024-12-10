@@ -1,15 +1,18 @@
 package com.chldbwls.sns.user.service;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.chldbwls.sns.common.MD5HashingEncoder;
+import com.chldbwls.sns.user.domain.User;
 import com.chldbwls.sns.user.repository.UserRepository;
 
 @Service
 public class UserService {
 	
+	// jpa 활용
 	private UserRepository userRepository;
 	
 	private UserService(UserRepository userRepository) {
@@ -23,15 +26,29 @@ public class UserService {
 			, String name
 			, LocalDate birthday) {
 		
+		// 비밀번호 암호화
 		String encodingPassword = MD5HashingEncoder.encode(password);
 		
-		int count = userRepository.insertUser(loginId, encodingPassword, name, birthday);
+		User user = User.builder()
+		.loginId(loginId)
+		.password(encodingPassword)
+		.name(name)
+		.birthday(birthday)
+		.build();
 		
-		if(count == 1) {
+		try {
+			userRepository.save(user);
 			return true;
-		} else {
+		} catch(Exception e) {
 			return false;
 		}
+		
+	}
+	
+	// 중복확인
+	public boolean isDuplicateId(String loginId) {
+		
+		return userRepository.existsByLoginId(loginId);
 	}
 
 }

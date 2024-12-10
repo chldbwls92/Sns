@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import groovy.transform.builder.Builder;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,8 +33,9 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.IDENTITY) //펄시스턴스
 	private int id;
 	
-	@Column(name="LoginId")
-	private String LoginId;
+	@Column(name="loginId")
+	private String loginId;
+	private String password;
 	private String name;
 	private LocalDate birthday;
 	

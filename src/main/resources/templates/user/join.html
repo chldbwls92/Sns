@@ -10,6 +10,10 @@
 			<div class="d-flex">
 				<input type="text" class="form-control mt-2 w-75" id="userIdInput" placeholder="아이디"><button type="button" id="duplicateBtn" class="ml-2 rounded btn btn-secondary">중복확인</button>
 			</div>
+			
+			<div class="small text-success d-none" id="availableText">사용 가능한 ID 입니다.</div>
+	        <div class="small text-danger d-none" id="duplicateText">중복된 ID 입니다.</div>
+			
 			<input type="password" class="form-control mt-2" id="passwordInput" placeholder="비밀번호">
 			<input type="password" class="form-control mt-2" id="passwordConfilmInput" placeholder="비밀번호확인">
 			<input type="text" class="form-control mt-2" id="nameInput" placeholder="성명">
@@ -62,6 +66,42 @@
 	    $('#day').append('<option value="' + i + '">' + i + '</option>');
 	  }
 	  
+	  
+	  // 중복확인 js
+	  $("#duplicateBtn").on("click", function() {
+			let id = $("#userIdInput").val();
+			
+			if(id == "") {
+				alert("아이디를 입력하세요");
+				return ;
+			}
+			
+			$.ajax({
+				type:"get"
+				, url:"/user/duplicate-id"
+				, data:{"loginId":id}
+				, success:function(response) {
+					
+					isDuplicateCheck = true;
+					
+					if(response.false) {
+						$("#duplicateText").removeClass("d-none");
+						$("#availableText").addClass("d-none");
+						isDuplicateId = true;
+					} else {
+						$("#availableText").removeClass("d-none");
+						$("#duplicateText").addClass("d-none");
+						isDuplicateId = false;
+					}
+				}
+				, error:function() {
+					alert("중복확인 에러!");
+				}
+			});
+	  });
+	  
+	  
+	  
 	  // joinBtn 클릭됐을 때
 	  $("#joinBtn").on("click", function() {
 		  let id = $("#userIdInput").val();
@@ -71,6 +111,14 @@
 		  let year = $("#year").val();
 		  let month = $("#month").val();
 		  let day = $("#day").val();
+		  
+		// 한자리수일 경우 앞에 0을 채워준다. 
+			if(month.length == 1){ 
+	          month = '0' + month; 
+	        } 
+	        if(day.length == 1){ 
+	          day = '0' + day; 
+	        } 
 		  
 		  let birthday = `${year}-${month}-${day}`;
 		  console.log(birthday);
@@ -121,6 +169,4 @@
 
 
 </script>
-
-</body>
 </html>
