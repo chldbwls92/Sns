@@ -14,7 +14,7 @@ public class UserController {
 		return "user/join";
 	}
 	
-	@PostMapping("/login-view")
+	@GetMapping("/login-view")
 	public String login() {
 		return "user/login";
 	}
