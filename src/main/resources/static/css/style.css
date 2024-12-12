@@ -1,8 +1,7 @@
 @charset "UTF-8";
 
 #wrap {
-   width:1440px;
-   heigth:1024px;
+   width:1000px;
    margin:0 auto;
    background-color:#FFFFFF;
 }
@@ -46,7 +45,7 @@ header {
 
 
 nav {
-	width:150px;
+	width:100px;
 	height:100%;
 	background-color:#A6C2FF;
 }
