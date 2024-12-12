@@ -43,3 +43,10 @@ header {
 .box {
 	width:32%;
 }
+
+
+nav {
+	width:150px;
+	height:100%;
+	background-color:#A6C2FF;
+}

@@ -50,5 +50,12 @@ public class UserService {
 		
 		return userRepository.existsByLoginId(loginId);
 	}
+	
+	// 특성 사용자 있는지 여부
+	public User getUser(String loginId, String password) {
+		
+		String encodingPassword = MD5HashingEncoder.encode(password);
+		return userRepository.findByLoginIdAndPassword(loginId, encodingPassword);
+	}
 
 }
