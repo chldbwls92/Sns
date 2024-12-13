@@ -2,23 +2,20 @@ package com.chldbwls.sns.post;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
+@RequestMapping("/post")
 public class PostController {
 
-	@GetMapping("/home/main-view")
-	public String home() {
-		return "home/main";
-	}
-	
-	@GetMapping("/post/create-view")
+	@GetMapping("/create-view")
 	public String createPost() {
 		return "post/create";
 	}
 	
-	@GetMapping("/post/list-view")
+	@GetMapping("/list-view")
 	public String postList() {
 		return "post/list";
 	}

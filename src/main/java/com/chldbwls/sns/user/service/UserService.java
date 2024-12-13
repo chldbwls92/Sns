@@ -57,5 +57,11 @@ public class UserService {
 		String encodingPassword = MD5HashingEncoder.encode(password);
 		return userRepository.findByLoginIdAndPassword(loginId, encodingPassword);
 	}
+	
+	
+	// post에서 사용할 것
+	public User getUserById(int id) {
+		return userRepository.findByUserId(id);
+	}
 
 }
