@@ -8,26 +8,26 @@
 		
 		<div layout:fragment="contents" class="w-80 d-flex justify-content-center ml-5">
 			<section class="contents ml-5">
-	        <div th:each="post:${postList}" class="ml-5">
+	        <div th:each="card:${cardList}" class="ml-5">
 	        	<div class="d-flex mt-3 mr-4 d-flex justify=content-center">
-		        	<div th:text="${post.userId}" class="font-weight-bold">user_name</div><div class="text-secondary small mt-1 ml-2 mr-5">13시간</div>
+		        	<div th:text="${card.loginId}" class="font-weight-bold">user_name</div><div class="text-secondary small mt-1 ml-2 mr-5">13시간</div>
 	        	</div>
 	        	<div>
-		        	<img class="w-80" th:src="${post.imagePath}">
+		        	<img class="h-50" th:src="${card.imagePath}">
 	        	</div>
-	        	<div th:text="${post.contents}" class="small mt-3">오늘 첫눈이 왔는데 진ㅉ ㅏ 너무 이쁘더라 어떻게 이렇게 이쁜가 했음</div>
-	        	<div class="d-flex">
-		        	<div>like</div><div class="ml-3">메시지 몇개인지</div>
+	        	<div th:text="${card.contents}" class="small mt-3">오늘 첫눈이 왔는데 진ㅉ ㅏ 너무 이쁘더라 어떻게 이렇게 이쁜가 했음</div>
+	        	<div class="d-flex">							<!-- 어떤 post인지 postId 얻어오기 -->
+		        	<i class="bi bi-heart text-danger like-btn" th:data-post-id="${card.postId}"></i> <div class="ml-3">메시지 몇개인지</div>
 	        	</div>
 	        	<div>
-	        		<div class="d-flex"> <!-- 댓글 -->
+	        		<div class="d-flex p-2"> <!-- 댓글 -->
 		        		<div class="font-weight-bold small">user_name</div><div class="text-secondary small">30분전</div>
 	        		</div>
 	        		<div>우왕</div>
 	        	</div>
 	        	<div class="input-group mb-3"> <!-- 댓글 적기 -->
-				  <input type="text" class="form-control h-25">
-				  <button class="btn btn-secondary btn-sm" type="button">전송</button>
+				  <input type="text" class="form-control h-25" th:id="|commentInput${card.postId}|">
+				  <button type="button" class="btn btn-info col-2 comment-btn" th:data-post-id="${card.postId}">전송</button>
 	        	</div>
 	        </div>
 	      	</section>
@@ -38,6 +38,75 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+
+
+<script layout:fragment="script">
+	$(document).ready(function() {
+		
+
+		// commentBtn click했을 때
+		$(".comment-btn").on("click", function() {
+			let postId = $(this).data("post-id");
+			
+			// prev = 현재 내가 누른 것 바로 앞에꺼를 가져온다는 의미
+			// but 구조가 간단하지 않거나 구조가 바뀌면 복잡해지고 가져오기가 어려움
+			/* let comment = $(this).prev().val(); */
+			let comment = $("#commentInput" + postId).val();
+			
+			$.ajax({
+				type:"post"
+				, url:"/post/comment/create"
+				, date:{"postId":postId, "contents":comment}
+				, success:function() {
+					if(response.result == "success") {
+						location.reload();
+					} else {
+						alert("댓글 작성 실패");
+					}
+				}
+				, error:function() {
+					alert("댓글 작성 에러!");
+				}
+			});
+			
+		})
+		
+		//likeBtn(좋아요) click했을 때
+		$(".like-btn").on("click", function() {
+			
+			// 이벤트가 발생한 태그 객체
+			// 미리 아이콘 태그에다가 정보를 심어놓으면(속성 부여) 그 정보를 this로 처리하여 알 수 있음
+			// 모두 클라이언트에서 작동하는 것들
+			// 해당하는 것의 post-id data를 얻어옴
+			let postId = $(this).data("post-id");
+			
+			$.ajax({
+				type:"post"
+				, url:"/post/like"
+				, data:{"postId":postId}
+				, success:function() {
+					if(response.result == "success") {
+						// 새로고침
+						location.reload();
+					} else {
+						alert("좋아요 실패");
+					}
+				}
+				, error:function() {
+					alert("좋아요 에러!");
+				}
+			});
+		});
+		
+		
+		
+	});
+
+</script>
+
+
+
+
 
 </body>
 </html>

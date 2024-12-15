@@ -1,4 +1,4 @@
-package com.chldbwls.sns.like;
+package com.chldbwls.sns.comment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,34 +7,35 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chldbwls.sns.like.service.LikeService;
+import com.chldbwls.sns.comment.service.CommentService;
 
 import jakarta.servlet.http.HttpSession;
 
 @RestController
-public class LikeRestController {
-
-	private LikeService likeService;
+public class CommentRestController {
 	
-	public LikeRestController(LikeService likeService) {
-		this.likeService = likeService;
+	private CommentService commentService;
+	
+	public CommentRestController(CommentService commentService) {
+		this.commentService = commentService;
 	}
 	
-	
-	// like 필요한 정보 전달
-	@PostMapping("/post/like")
-	public Map<String, String> like(
+	@PostMapping("/post/comment/create")
+	public Map<String, String> createComment(
 			@RequestParam("postId") int postId
+			, @RequestParam("contents") String contents
 			, HttpSession session) {
 		
-		int userId = (Integer)session.getAttribute("id");
-		
+		int userId = (Integer)session.getAttribute("userId");
 		Map<String, String> resultMap = new HashMap<>();
-		if(likeService.addLike(postId, userId)) {
+		
+		if(commentService.addComment(postId, userId, contents)) {
 			resultMap.put("result", "success");
 		} else {
 			resultMap.put("result", "fail");
 		}
+		
 		return resultMap;
 	}
+
 }

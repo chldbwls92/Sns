@@ -61,7 +61,7 @@ public class UserService {
 	
 	// post에서 사용할 것
 	public User getUserById(int id) {
-		return userRepository.findByUserId(id);
+		return userRepository.findById(id);
 	}
 
 }
