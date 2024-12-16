@@ -1,5 +1,7 @@
 package com.chldbwls.sns.like.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.chldbwls.sns.like.domain.Like;
@@ -28,7 +30,22 @@ public class LikeService {
 		} catch(Exception e) {
 			return false;
 		}
-		
+	}
+	
+	public boolean deleteLike(int postId, int userId) {
+		Optional<Like> optionalLike = likeRepository.findByPostIdAndUserId(postId, userId);
+		if(optionalLike.isPresent()) {
+			Like like = optionalLike.get();
+			likeRepository.delete(like); // 전달하는 항목은 삭제대상
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	// 게시글 삭제되면 관련 like 정보 다 삭제
+	public void deleteLikeByPostId(int postId) {
+		likeRepository.deleteByPostId(postId);
 	}
 	
 

@@ -28,8 +28,12 @@ public class CommentService {
 		} catch(Exception e) {
 			return false;
 		}
-		
-		
+	}
+	
+	
+	// 댓글 삭제 service(해당 게시글이 삭제되었을때)
+	public void deleteCommentByPostId(int postId) {
+		commentRepository.deleteByPostId(postId);
 	}
 
 }

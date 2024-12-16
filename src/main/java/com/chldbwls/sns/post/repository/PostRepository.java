@@ -9,6 +9,10 @@ import com.chldbwls.sns.post.domain.Post;
 public interface PostRepository extends JpaRepository<Post, Integer>{
 	
 	public List<Post> findAllByOrderByIdDesc();
+	
+	// user의 post만 select 하는
+	// WHERE `userId` = #{} ORDER BY `id` DESC
+	public List<Post> findByUserIdOrderByIdDesc(int userId);
 
 	
 }
