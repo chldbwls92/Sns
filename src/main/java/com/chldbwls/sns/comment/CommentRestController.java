@@ -26,7 +26,7 @@ public class CommentRestController {
 			, @RequestParam("contents") String contents
 			, HttpSession session) {
 		
-		int userId = (Integer)session.getAttribute("userId");
+		int userId = (Integer)session.getAttribute("id");
 		Map<String, String> resultMap = new HashMap<>();
 		
 		if(commentService.addComment(postId, userId, contents)) {

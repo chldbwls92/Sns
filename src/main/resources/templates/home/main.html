@@ -56,7 +56,7 @@
 			$.ajax({
 				type:"post"
 				, url:"/post/comment/create"
-				, date:{"postId":postId, "contents":comment}
+				, data:{"postId":postId, "contents":comment}
 				, success:function() {
 					if(response.result == "success") {
 						location.reload();
