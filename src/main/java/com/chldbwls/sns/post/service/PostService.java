@@ -122,6 +122,7 @@ public class PostService {
 		return cardList;
 	}
 	
+
 	// post delete service
 	public boolean deletePost(int id) {
 		

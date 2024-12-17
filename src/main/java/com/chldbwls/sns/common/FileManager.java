@@ -13,6 +13,10 @@ public class FileManager {
 	public final static String FILE_UPLOAD_PATH = "C:\\springProject\\upload\\SNS";
 	
 	public static String saveFile(int userId, MultipartFile file) {
+		
+		if(file == null) {
+			return null;
+		}
 	
 		// 파일 이름
 		String directoryName = "/" + userId + "_" + System.currentTimeMillis();
