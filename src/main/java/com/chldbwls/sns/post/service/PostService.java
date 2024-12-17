@@ -122,6 +122,35 @@ public class PostService {
 		return cardList;
 	}
 	
+//	 post 수정 service
+	public boolean updatePost(int id, String contents){
+		
+		Optional<Post> optionalPost = postRepository.findById(id);
+			// 얘가 null이면 false return
+		if(optionalPost.isPresent()) {
+			
+			Post post = optionalPost.get();
+			
+			post = post.toBuilder()
+			.contents(contents)
+			.build();
+			
+			try {
+				postRepository.save(post);
+				return true;
+			} catch(Exception e) {
+				return false;
+			}
+			
+			
+		} else {
+			return false;
+		}
+		
+	}
+	
+	
+	
 
 	// post delete service
 	public boolean deletePost(int id) {

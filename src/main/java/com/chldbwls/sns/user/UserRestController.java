@@ -77,10 +77,9 @@ public class UserRestController {
 			// 서블릿 기반
 			HttpSession session = request.getSession();
 			
-			// user id, user memo
 			// 어디서든 session값 가져와서 쓸 수 있음
-			session.setAttribute("id", user.getId());
-			session.setAttribute("password", user.getPassword());
+			session.setAttribute("userId", user.getId());
+			session.setAttribute("userLoginId", user.getLoginId());
 			// 사용자정보의 이름, id 정보 저장(업캐스팅 되어서)
 			
 			resultMap.put("result", "success");

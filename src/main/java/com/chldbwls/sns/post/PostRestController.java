@@ -49,8 +49,13 @@ public class PostRestController {
 			@RequestParam("id") int id
 			, @RequestParam("contents") String contents) {
 		
-		
-		
+		Map<String, String> resultMap = new HashMap<>();
+		if(postService.updatePost(id, contents)) {
+			resultMap.put("result", "success");
+		} else {
+			resultMap.put("result", "fail");
+		}
+		return resultMap;
 	}
 	
 	

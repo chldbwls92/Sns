@@ -43,13 +43,6 @@ public class PostController {
 		return "post/list";
 	}
 	
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		
-		session.removeAttribute("userId");
-		session.removeAttribute("userLoginId");
-		
-		return "redirect:/user/login-view";
-	}
+
 	
 }
