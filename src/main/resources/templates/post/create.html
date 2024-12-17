@@ -11,7 +11,8 @@
 		        	<h1 class="text-center">POST</h1>
 		        	<textarea class="form-control" id="contentsInput" rows="10" placeholder="내용을 입력하세요"></textarea>
 		        	<div class="d-flex mt-3">
-		        		<input type="file" id="fileInput">
+		        		<i class="bi bi-card-image big-font" id="imageButton"></i>
+		        		<input type="file" id="fileInput" class="d-none">
 		        		<button type="submit" class="btn btn-dark justify-content-center btn-sm w-25" id="shareBtn">공유</button>
 		        	</div>	
 				</div>
@@ -21,6 +22,12 @@
 	
 	<script layout:fragment="script">
 		$(document).ready(function() {
+			
+			// 파일 이미지 클릭했을 때 파일 나오게 하는
+			$("#imageButton").on("click", function() {
+				$("#fileInput").click();
+			});
+			
 			
 			// share버튼이 눌릴 때
 			$("#shareBtn").on("click", function() {

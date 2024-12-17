@@ -32,6 +32,23 @@ public class LikeService {
 		}
 	}
 	
+	// 특정한 게시글 좋아요 갯수 얻어오는 기능
+	public int getLikeCount(int postId) {
+		return likeRepository.countByPostId(postId);
+	}
+	
+	public boolean isLike(int postId, int userId) {
+		int count = likeRepository.countByPostIdAndUserId(postId, userId);
+		
+		if(count > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	
+	
 	public boolean deleteLike(int postId, int userId) {
 		Optional<Like> optionalLike = likeRepository.findByPostIdAndUserId(postId, userId);
 		if(optionalLike.isPresent()) {

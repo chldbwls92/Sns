@@ -1,5 +1,9 @@
 package com.chldbwls.sns.post.dto;
 
+import java.util.List;
+
+import com.chldbwls.sns.comment.dto.CommentDTO;
+
 import lombok.Builder;
 import lombok.Getter;
 
@@ -16,5 +20,10 @@ public class CardDTO {
 	
 	private String loginId;
 	
+	// 갯수 세기 위한 멤버변수 추가
+	private int likeCount;
+	private boolean isLike;
+	
+	List<CommentDTO> commentList;
 
 }

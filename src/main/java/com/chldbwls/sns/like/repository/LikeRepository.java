@@ -17,6 +17,8 @@ public interface LikeRepository extends JpaRepository<Like, Integer>{
 	// like 취소 repository
 	public Optional<Like> findByPostIdAndUserId(int postId, int userId);
 	
+	// SELECT count(*) FROM `like` WHERE `postId` = #{} AND `userId` =#{}
+	public int countByPostIdAndUserId(int postId, int userId);
 	
 	// post 삭제되면 관련 like 정보 다 삭제
 	// delete 는 select 가 실행이 되는데 이 두개를 같이 한꺼번에 실행시켜야돼

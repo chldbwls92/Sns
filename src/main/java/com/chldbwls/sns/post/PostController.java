@@ -37,8 +37,8 @@ public class PostController {
 		
 		int userId = (Integer)session.getAttribute("id");
 		
-		List<CardDTO> card = postService.getUserPostList(userId);
-		model.addAttribute("cardList", card);
+		List<CardDTO> cardList = postService.getUserPostList(userId);
+		model.addAttribute("cardList", cardList);
 		
 		return "post/list";
 	}
